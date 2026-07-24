@@ -14,7 +14,7 @@ export function Calculator() {
   const [industryId, setIndustryId] = useState<(typeof INDUSTRIES)[number]["id"]>("servicios");
   const industry = INDUSTRIES.find((i) => i.id === industryId)!;
   const [visitors, setVisitors] = useState(5000);
-  const [ticket, setTicket] = useState(industry.ticket);
+  const [ticket, setTicket] = useState<number>(industry.ticket);
 
   const current = useMemo(
     () => Math.round(visitors * (industry.currentCR / 100) * ticket),
