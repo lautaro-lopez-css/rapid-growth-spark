@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { motion } from "motion/react";
+import { motion, useScroll, useTransform, useMotionValue, useSpring } from "motion/react";
+import { useRef, type MouseEvent } from "react";
 import { MagneticButton } from "@/components/landing/MagneticButton";
 import { AnimatedCounter } from "@/components/landing/AnimatedCounter";
 import { BeforeAfter } from "@/components/landing/BeforeAfter";
@@ -30,25 +31,112 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const fadeUp = {
-  initial: { opacity: 0, y: 30 },
-  whileInView: { opacity: 1, y: 0 },
+const revealBlur = {
+  initial: { opacity: 0, y: 40, filter: "blur(14px)" },
+  whileInView: { opacity: 1, y: 0, filter: "blur(0px)" },
   viewport: { once: true, margin: "-80px" },
-  transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] as const },
+  transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] as const },
 };
+
+const revealClip = {
+  initial: { opacity: 0, clipPath: "inset(0 0 100% 0)" },
+  whileInView: { opacity: 1, clipPath: "inset(0 0 0% 0)" },
+  viewport: { once: true, margin: "-80px" },
+  transition: { duration: 1, ease: [0.16, 1, 0.3, 1] as const },
+};
+
+function MetricCard({
+  value,
+  suffix,
+  label,
+  index,
+}: {
+  value: number;
+  suffix: string;
+  label: string;
+  index: number;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const mx = useMotionValue(0);
+  const my = useMotionValue(0);
+  const rx = useSpring(useTransform(my, [-1, 1], [8, -8]), { stiffness: 150, damping: 15 });
+  const ry = useSpring(useTransform(mx, [-1, 1], [-8, 8]), { stiffness: 150, damping: 15 });
+  const sx = useMotionValue(50);
+  const sy = useMotionValue(50);
+
+  const onMove = (e: MouseEvent<HTMLDivElement>) => {
+    const el = ref.current;
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width;
+    const y = (e.clientY - r.top) / r.height;
+    mx.set(x * 2 - 1);
+    my.set(y * 2 - 1);
+    sx.set(x * 100);
+    sy.set(y * 100);
+  };
+  const onLeave = () => {
+    mx.set(0);
+    my.set(0);
+  };
+
+  return (
+    <motion.div
+      ref={ref}
+      onMouseMove={onMove}
+      onMouseLeave={onLeave}
+      initial={{ opacity: 0, y: 30, filter: "blur(10px)" }}
+      whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+      viewport={{ once: true, margin: "-80px" }}
+      transition={{ duration: 0.8, delay: index * 0.12, ease: [0.16, 1, 0.3, 1] }}
+      style={{ rotateX: rx, rotateY: ry, transformStyle: "preserve-3d" }}
+      className="group relative overflow-hidden bg-background p-10 md:p-12"
+    >
+      <motion.div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        style={{
+          background: useTransform(
+            [sx, sy],
+            ([x, y]) =>
+              `radial-gradient(400px circle at ${x}% ${y}%, oklch(0.85 0.19 195 / 0.18), transparent 60%)`,
+          ),
+        }}
+      />
+      <div className="relative text-5xl font-bold tracking-tight text-gradient-neon md:text-6xl">
+        +<AnimatedCounter to={value} suffix={suffix} />
+      </div>
+      <p className="relative mt-4 text-sm uppercase tracking-[0.2em] text-muted-foreground">{label}</p>
+    </motion.div>
+  );
+}
 
 function Index() {
   const scrollTo = (id: string) => () => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
+  const { scrollY } = useScroll();
+  const bgY1 = useTransform(scrollY, [0, 2000], [0, -300]);
+  const bgY2 = useTransform(scrollY, [0, 2000], [0, 200]);
+  const gridY = useTransform(scrollY, [0, 2000], [0, -150]);
+
   return (
     <main className="relative min-h-screen overflow-hidden bg-background text-foreground">
       {/* Ambient background */}
       <div className="pointer-events-none fixed inset-0 -z-10">
-        <div className="absolute inset-0 grid-bg opacity-40 [mask-image:radial-gradient(ellipse_at_top,black_20%,transparent_70%)]" />
-        <div className="absolute -top-40 left-1/2 h-[600px] w-[900px] -translate-x-1/2 rounded-full bg-[var(--neon-cyan)]/10 blur-[140px]" />
-        <div className="absolute top-[40%] right-0 h-[500px] w-[500px] rounded-full bg-[var(--neon-violet)]/15 blur-[140px]" />
+        <motion.div
+          style={{ y: gridY }}
+          className="absolute inset-0 grid-bg opacity-40 [mask-image:radial-gradient(ellipse_at_top,black_20%,transparent_70%)]"
+        />
+        <motion.div
+          style={{ y: bgY1 }}
+          className="absolute -top-40 left-1/2 h-[600px] w-[900px] -translate-x-1/2 rounded-full bg-[var(--neon-cyan)]/10 blur-[140px]"
+        />
+        <motion.div
+          style={{ y: bgY2 }}
+          className="absolute top-[40%] right-0 h-[500px] w-[500px] rounded-full bg-[var(--neon-violet)]/15 blur-[140px]"
+        />
       </div>
 
       {/* Nav */}
@@ -104,27 +192,20 @@ function Index() {
 
       {/* METRICS */}
       <section id="metricas" className="mx-auto max-w-7xl px-6 pb-32">
-        <motion.div {...fadeUp} className="grid gap-px overflow-hidden rounded-3xl border border-border bg-border md:grid-cols-3">
+        <div className="grid gap-px overflow-hidden rounded-3xl border border-border bg-border md:grid-cols-3 [perspective:1200px]">
           {[
             { value: 200, suffix: "%", label: "Aumento en conversión promedio" },
             { value: 48, suffix: "hs", label: "Tiempo de entrega garantizado" },
             { value: 100, suffix: "%", label: "Optimizado para Core Web Vitals" },
-          ].map((m) => (
-            <div key={m.label} className="bg-background p-10 md:p-12">
-              <div className="text-5xl font-bold tracking-tight text-gradient-neon md:text-6xl">
-                +<AnimatedCounter to={m.value} suffix={m.suffix} />
-              </div>
-              <p className="mt-4 text-sm uppercase tracking-[0.2em] text-muted-foreground">
-                {m.label}
-              </p>
-            </div>
+          ].map((m, i) => (
+            <MetricCard key={m.label} index={i} value={m.value} suffix={m.suffix} label={m.label} />
           ))}
-        </motion.div>
+        </div>
       </section>
 
       {/* BEFORE / AFTER */}
       <section id="trabajos" className="mx-auto max-w-7xl px-6 pb-32">
-        <motion.div {...fadeUp} className="mb-14 max-w-2xl">
+        <motion.div {...revealClip} className="mb-14 max-w-2xl">
           <p className="mb-3 text-xs uppercase tracking-[0.25em] text-[var(--neon-cyan)]">
             Antes / Después
           </p>
@@ -146,7 +227,7 @@ function Index() {
 
       {/* CALCULATOR */}
       <section id="calculadora" className="mx-auto max-w-7xl px-6 pb-32">
-        <motion.div {...fadeUp} className="mb-14 max-w-2xl">
+        <motion.div {...revealClip} className="mb-14 max-w-2xl">
           <p className="mb-3 text-xs uppercase tracking-[0.25em] text-[var(--neon-cyan)]">
             Impacto real
           </p>
@@ -158,7 +239,7 @@ function Index() {
             Mueve los sliders y observa el ingreso que podrías capturar con una landing optimizada.
           </p>
         </motion.div>
-        <motion.div {...fadeUp}>
+        <motion.div {...revealBlur}>
           <Calculator />
         </motion.div>
       </section>
@@ -166,7 +247,7 @@ function Index() {
       {/* FINAL CTA */}
       <section id="cta-final" className="relative mx-auto max-w-7xl px-6 pb-32">
         <motion.div
-          {...fadeUp}
+          {...revealBlur}
           className="relative overflow-hidden rounded-[2rem] border border-border bg-card px-8 py-24 text-center md:px-16 md:py-32"
         >
           <div className="pointer-events-none absolute inset-0 grid-bg opacity-40" />
