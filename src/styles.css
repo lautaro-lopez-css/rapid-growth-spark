@@ -148,10 +148,46 @@
     font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
     -webkit-font-smoothing: antialiased;
+    transition: background-color 0.4s ease, color 0.4s ease;
   }
   html {
     color-scheme: dark;
   }
+  html.light {
+    color-scheme: light;
+  }
+}
+
+/* Light mode override — flips the neon palette onto a bright canvas */
+.light {
+  --background: oklch(0.985 0.005 260);
+  --foreground: oklch(0.15 0.02 260);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.15 0.02 260);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.15 0.02 260);
+  --primary: oklch(0.55 0.2 250);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.55 0.25 300);
+  --secondary-foreground: oklch(0.99 0 0);
+  --muted: oklch(0.95 0.01 260);
+  --muted-foreground: oklch(0.45 0.02 260);
+  --accent: oklch(0.55 0.2 250);
+  --accent-foreground: oklch(0.99 0 0);
+  --destructive: oklch(0.6 0.24 25);
+  --destructive-foreground: oklch(0.99 0 0);
+  --border: oklch(0.9 0.01 260);
+  --input: oklch(0.94 0.01 260);
+  --ring: oklch(0.55 0.2 250);
+  --neon-cyan: oklch(0.55 0.2 220);
+  --neon-violet: oklch(0.5 0.25 300);
+  --gradient-neon: linear-gradient(135deg, oklch(0.55 0.2 220), oklch(0.5 0.25 300));
+}
+
+.light .grid-bg {
+  background-image:
+    linear-gradient(to right, oklch(0.55 0.2 220 / 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, oklch(0.55 0.2 220 / 0.08) 1px, transparent 1px);
 }
 
 @utility text-gradient-neon {

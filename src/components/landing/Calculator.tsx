@@ -1,7 +1,27 @@
-import { useState, useMemo } from "react";
-import { motion } from "motion/react";
+import { useState, useMemo, useEffect } from "react";
+import { motion, useSpring, useTransform, useMotionValue } from "motion/react";
 import { Slider } from "@/components/ui/slider";
 import { AnimatedCounter } from "./AnimatedCounter";
+
+function SpringNumber({
+  value,
+  prefix = "",
+  suffix = "",
+  className = "",
+}: {
+  value: number;
+  prefix?: string;
+  suffix?: string;
+  className?: string;
+}) {
+  const mv = useMotionValue(value);
+  const spring = useSpring(mv, { stiffness: 90, damping: 20, mass: 0.6 });
+  const text = useTransform(spring, (v) => `${prefix}${Math.round(v).toLocaleString("es-ES")}${suffix}`);
+  useEffect(() => {
+    mv.set(value);
+  }, [value, mv]);
+  return <motion.span className={"tabular-nums " + className}>{text}</motion.span>;
+}
 
 const INDUSTRIES = [
   { id: "servicios", label: "Servicios / Consultoría", ticket: 850, currentCR: 1.4, optimizedCR: 3.6 },
@@ -45,18 +65,28 @@ export function Calculator() {
             {INDUSTRIES.map((i) => {
               const active = i.id === industryId;
               return (
-                <button
+                <motion.button
                   key={i.id}
                   onClick={() => selectIndustry(i.id)}
+                  whileHover={{ y: -2, scale: 1.02 }}
+                  whileTap={{ scale: 0.94 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 18 }}
                   className={
-                    "rounded-xl border px-3 py-3 text-left text-xs font-medium transition-all " +
+                    "relative overflow-hidden rounded-xl border px-3 py-3 text-left text-xs font-medium transition-colors " +
                     (active
                       ? "border-[var(--neon-cyan)] bg-[var(--neon-cyan)]/10 text-foreground shadow-[0_0_20px_-8px_var(--neon-cyan)]"
                       : "border-border bg-background/40 text-muted-foreground hover:border-[var(--neon-cyan)]/50 hover:text-foreground")
                   }
                 >
+                  {active && (
+                    <motion.span
+                      layoutId="industry-active"
+                      className="absolute inset-0 -z-10 rounded-xl bg-gradient-to-br from-[var(--neon-cyan)]/20 to-[var(--neon-violet)]/20"
+                      transition={{ type: "spring", stiffness: 300, damping: 25 }}
+                    />
+                  )}
                   {i.label}
-                </button>
+                </motion.button>
               );
             })}
           </div>
@@ -67,9 +97,7 @@ export function Calculator() {
             <label className="text-sm uppercase tracking-[0.2em] text-muted-foreground">
               Visitas mensuales
             </label>
-            <span className="text-2xl font-semibold tabular-nums text-foreground">
-              {visitors.toLocaleString("es-ES")}
-            </span>
+            <SpringNumber value={visitors} className="text-2xl font-semibold text-foreground" />
           </div>
           <Slider value={[visitors]} onValueChange={(v) => setVisitors(v[0])} min={500} max={50000} step={500} />
         </div>
@@ -84,9 +112,7 @@ export function Calculator() {
                 Valor promedio de una venta o cliente en tu industria
               </p>
             </div>
-            <span className="text-2xl font-semibold tabular-nums text-foreground">
-              ${ticket}
-            </span>
+            <SpringNumber value={ticket} prefix="$" className="text-2xl font-semibold text-foreground" />
           </div>
           <Slider value={[ticket]} onValueChange={(v) => setTicket(v[0])} min={20} max={3000} step={10} />
         </div>
@@ -111,9 +137,11 @@ export function Calculator() {
         <div className="flex items-baseline justify-between gap-4">
           <div>
             <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Ingresos actuales</p>
-            <p className="mt-1 text-2xl font-medium text-muted-foreground line-through decoration-destructive/60">
-              ${current.toLocaleString("es-ES")}
-            </p>
+            <SpringNumber
+              value={current}
+              prefix="$"
+              className="mt-1 block text-2xl font-medium text-muted-foreground line-through decoration-destructive/60"
+            />
           </div>
           <div className="text-right">
             <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Multiplicador</p>
@@ -125,26 +153,29 @@ export function Calculator() {
           <p className="text-xs uppercase tracking-[0.2em] text-[var(--neon-cyan)]">
             Ingresos con landing optimizada
           </p>
-          <motion.p
-            key={optimized}
-            initial={{ opacity: 0.5, y: 6 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="mt-1 text-5xl font-bold tracking-tight text-gradient-neon md:text-6xl"
-          >
-            ${optimized.toLocaleString("es-ES")}
-          </motion.p>
+          <SpringNumber
+            value={optimized}
+            prefix="$"
+            className="mt-1 block text-5xl font-bold tracking-tight text-gradient-neon md:text-6xl"
+          />
         </div>
 
         <div className="grid grid-cols-2 gap-3">
           <div className="rounded-xl border border-[var(--neon-cyan)]/30 bg-[var(--neon-cyan)]/5 p-4">
             <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Ganancia extra / mes</p>
-            <p className="mt-1 text-xl font-semibold text-[var(--neon-cyan)]">
-              +${delta.toLocaleString("es-ES")}
-            </p>
+            <SpringNumber
+              value={delta}
+              prefix="+$"
+              className="mt-1 block text-xl font-semibold text-[var(--neon-cyan)]"
+            />
           </div>
           <div className="rounded-xl border border-border bg-background/40 p-4">
             <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Clientes extra / mes</p>
-            <p className="mt-1 text-xl font-semibold text-foreground">+{extraLeads.toLocaleString("es-ES")}</p>
+            <SpringNumber
+              value={extraLeads}
+              prefix="+"
+              className="mt-1 block text-xl font-semibold text-foreground"
+            />
           </div>
         </div>
 

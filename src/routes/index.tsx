@@ -5,6 +5,9 @@ import { MagneticButton } from "@/components/landing/MagneticButton";
 import { AnimatedCounter } from "@/components/landing/AnimatedCounter";
 import { BeforeAfter } from "@/components/landing/BeforeAfter";
 import { Calculator } from "@/components/landing/Calculator";
+import { ThemeToggle } from "@/components/landing/ThemeToggle";
+import { AiChat } from "@/components/landing/AiChat";
+import { ContactSection } from "@/components/landing/ContactSection";
 import before1 from "@/assets/before-1.jpg";
 import after1 from "@/assets/after-1.jpg";
 import before2 from "@/assets/before-2.jpg";
@@ -150,10 +153,14 @@ function Index() {
           <a href="#metricas" className="transition-colors hover:text-foreground">Resultados</a>
           <a href="#trabajos" className="transition-colors hover:text-foreground">Trabajos</a>
           <a href="#calculadora" className="transition-colors hover:text-foreground">Calculadora</a>
+          <a href="#contacto" className="transition-colors hover:text-foreground">Contacto</a>
         </nav>
-        <MagneticButton variant="ghost" onClick={scrollTo("cta-final")} className="px-5 py-2 text-sm">
-          Empezar
-        </MagneticButton>
+        <div className="flex items-center gap-3">
+          <ThemeToggle />
+          <MagneticButton variant="ghost" onClick={scrollTo("contacto")} className="px-5 py-2 text-sm">
+            Empezar
+          </MagneticButton>
+        </div>
       </header>
 
       {/* HERO */}
@@ -267,7 +274,7 @@ function Index() {
               semana.
             </p>
             <div className="mt-12 flex justify-center">
-              <MagneticButton className="px-10 py-5 text-lg">
+              <MagneticButton onClick={scrollTo("contacto")} className="px-10 py-5 text-lg">
                 Quiero mi Landing en 48hs
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                   <path d="M5 12h14M13 6l6 6-6 6" />
@@ -281,6 +288,23 @@ function Index() {
         </motion.div>
       </section>
 
+      {/* CONTACTO */}
+      <section id="contacto" className="mx-auto max-w-7xl px-6 pb-32">
+        <motion.div {...revealClip} className="mb-14 max-w-2xl">
+          <p className="mb-3 text-xs uppercase tracking-[0.25em] text-[var(--neon-cyan)]">
+            Hablemos
+          </p>
+          <h2 className="text-4xl font-bold leading-tight tracking-tight md:text-5xl">
+            Dos formas de{" "}
+            <span className="text-gradient-neon">empezar hoy</span>
+          </h2>
+          <p className="mt-4 text-lg text-muted-foreground">
+            Contanos qué necesitás por email o pasá directo al WhatsApp para coordinar una llamada rápida.
+          </p>
+        </motion.div>
+        <ContactSection />
+      </section>
+
       <footer className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 border-t border-border px-6 py-10 text-sm text-muted-foreground md:flex-row">
         <div className="flex items-center gap-2">
           <div className="h-2 w-2 rounded-full bg-[var(--neon-cyan)] shadow-[0_0_10px_var(--neon-cyan)]" />
@@ -288,6 +312,8 @@ function Index() {
         </div>
         <span>© {new Date().getFullYear()} · Hecho con obsesión por la conversión</span>
       </footer>
+
+      <AiChat />
     </main>
   );
 }
