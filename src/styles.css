@@ -160,24 +160,24 @@
 
 /* Light mode override — flips the neon palette onto a bright canvas */
 .light {
-  --background: oklch(0.985 0.005 260);
-  --foreground: oklch(0.15 0.02 260);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.15 0.02 260);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.15 0.02 260);
+  --background: oklch(0.94 0.008 250);
+  --foreground: oklch(0.22 0.02 260);
+  --card: oklch(0.965 0.006 250);
+  --card-foreground: oklch(0.22 0.02 260);
+  --popover: oklch(0.965 0.006 250);
+  --popover-foreground: oklch(0.22 0.02 260);
   --primary: oklch(0.55 0.2 250);
   --primary-foreground: oklch(0.99 0 0);
   --secondary: oklch(0.55 0.25 300);
   --secondary-foreground: oklch(0.99 0 0);
-  --muted: oklch(0.95 0.01 260);
-  --muted-foreground: oklch(0.45 0.02 260);
+  --muted: oklch(0.9 0.01 255);
+  --muted-foreground: oklch(0.42 0.02 260);
   --accent: oklch(0.55 0.2 250);
   --accent-foreground: oklch(0.99 0 0);
   --destructive: oklch(0.6 0.24 25);
   --destructive-foreground: oklch(0.99 0 0);
-  --border: oklch(0.9 0.01 260);
-  --input: oklch(0.94 0.01 260);
+  --border: oklch(0.85 0.012 258);
+  --input: oklch(0.9 0.01 258);
   --ring: oklch(0.55 0.2 250);
   --neon-cyan: oklch(0.55 0.2 220);
   --neon-violet: oklch(0.5 0.25 300);
@@ -206,4 +206,14 @@
     linear-gradient(to right, oklch(0.85 0.19 195 / 0.06) 1px, transparent 1px),
     linear-gradient(to bottom, oklch(0.85 0.19 195 / 0.06) 1px, transparent 1px);
   background-size: 48px 48px;
+}
+
+/* Matrix rain — blends brightly against dark and softly against light */
+.matrix-rain {
+  opacity: 0.32;
+  mix-blend-mode: screen;
+}
+.light .matrix-rain {
+  opacity: 0.28;
+  mix-blend-mode: multiply;
 }
