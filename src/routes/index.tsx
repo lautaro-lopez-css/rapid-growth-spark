@@ -9,6 +9,7 @@ import { Flashlight } from "@/components/landing/Flashlight";
 import { MatrixRain } from "@/components/landing/MatrixRain";
 import { AiChat } from "@/components/landing/AiChat";
 import { ContactSection } from "@/components/landing/ContactSection";
+import { ParticleSphere } from "@/components/landing/ParticleSphere";
 import before1 from "@/assets/before-1.jpg";
 import after1 from "@/assets/after-1.jpg";
 import before2 from "@/assets/before-2.jpg";
@@ -166,7 +167,16 @@ function Index() {
 
       {/* HERO — asymmetric */}
       <section className="relative mx-auto max-w-7xl px-6 pt-20 pb-48 md:pt-32 md:pb-64">
-        <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-12 lg:gap-6">
+        {/* 3D particle sphere background — interactive, sits behind text */}
+        <div className="pointer-events-none absolute inset-0 -z-0 overflow-hidden">
+          <div className="pointer-events-auto absolute inset-0">
+            <ParticleSphere />
+          </div>
+          {/* Legibility scrim: darker on the left where the headline sits */}
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_left,hsl(var(--background)/0.85)_0%,hsl(var(--background)/0.55)_35%,transparent_70%)]" />
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-background" />
+        </div>
+        <div className="relative z-10 grid grid-cols-1 items-center gap-16 lg:grid-cols-12 lg:gap-6">
           {/* Left: text block, pushed against the left rail */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
