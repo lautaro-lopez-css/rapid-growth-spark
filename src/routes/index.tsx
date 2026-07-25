@@ -127,6 +127,7 @@ function Index() {
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-background text-foreground">
+      <MatrixRain />
       {/* Ambient background */}
       <div className="pointer-events-none fixed inset-0 -z-10">
         <motion.div
