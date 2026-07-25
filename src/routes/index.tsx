@@ -5,7 +5,8 @@ import { MagneticButton } from "@/components/landing/MagneticButton";
 import { AnimatedCounter } from "@/components/landing/AnimatedCounter";
 import { BeforeAfter } from "@/components/landing/BeforeAfter";
 import { Calculator } from "@/components/landing/Calculator";
-import { ThemeToggle } from "@/components/landing/ThemeToggle";
+import { Flashlight } from "@/components/landing/Flashlight";
+import { MatrixRain } from "@/components/landing/MatrixRain";
 import { AiChat } from "@/components/landing/AiChat";
 import { ContactSection } from "@/components/landing/ContactSection";
 import before1 from "@/assets/before-1.jpg";
@@ -156,7 +157,6 @@ function Index() {
           <a href="#contacto" className="transition-colors hover:text-foreground">Contacto</a>
         </nav>
         <div className="flex items-center gap-3">
-          <ThemeToggle />
           <MagneticButton variant="ghost" onClick={scrollTo("contacto")} className="px-5 py-2 text-sm">
             Empezar
           </MagneticButton>
@@ -314,6 +314,7 @@ function Index() {
       </footer>
 
       <AiChat />
+      <Flashlight />
     </main>
   );
 }
