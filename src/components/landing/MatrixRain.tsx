@@ -85,7 +85,7 @@ export function MatrixRain() {
     <canvas
       ref={canvasRef}
       aria-hidden
-      className="pointer-events-none fixed inset-0 -z-10 opacity-[0.28] mix-blend-screen"
+      className="matrix-rain pointer-events-none fixed inset-0 -z-10"
     />
   );
 }
