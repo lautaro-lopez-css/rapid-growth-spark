@@ -293,7 +293,7 @@ function Index() {
       </section>
 
       {/* BEFORE / AFTER */}
-      <section id="trabajos" className="mx-auto max-w-7xl px-6 pb-32">
+      <section id="trabajos" className="mx-auto max-w-7xl px-6 pb-48 md:pb-56">
         <motion.div {...revealClip} className="mb-14 max-w-2xl">
           <p className="mb-3 text-xs uppercase tracking-[0.25em] text-[var(--neon-cyan)]">
             Antes / Después
@@ -315,7 +315,7 @@ function Index() {
       </section>
 
       {/* CALCULATOR */}
-      <section id="calculadora" className="mx-auto max-w-7xl px-6 pb-32">
+      <section id="calculadora" className="mx-auto max-w-7xl px-6 pb-48 md:pb-56">
         <motion.div {...revealClip} className="mb-14 max-w-2xl">
           <p className="mb-3 text-xs uppercase tracking-[0.25em] text-[var(--neon-cyan)]">
             Impacto real
@@ -334,7 +334,7 @@ function Index() {
       </section>
 
       {/* FINAL CTA */}
-      <section id="cta-final" className="relative mx-auto max-w-7xl px-6 pb-32">
+      <section id="cta-final" className="relative mx-auto max-w-7xl px-6 pb-48 md:pb-56">
         <motion.div
           {...revealBlur}
           className="relative overflow-hidden rounded-[2rem] border border-border bg-card px-8 py-24 text-center md:px-16 md:py-32"
@@ -371,7 +371,7 @@ function Index() {
       </section>
 
       {/* CONTACTO */}
-      <section id="contacto" className="mx-auto max-w-7xl px-6 pb-32">
+      <section id="contacto" className="mx-auto max-w-7xl px-6 pb-48 md:pb-56">
         <motion.div {...revealClip} className="mb-14 max-w-2xl">
           <p className="mb-3 text-xs uppercase tracking-[0.25em] text-[var(--neon-cyan)]">
             Hablemos
