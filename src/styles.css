@@ -69,24 +69,31 @@
   --card-foreground: oklch(0.98 0.005 260);
   --popover: oklch(0.12 0.015 260);
   --popover-foreground: oklch(0.98 0.005 260);
-  --primary: oklch(0.85 0.19 195);
-  --primary-foreground: oklch(0.09 0.01 260);
-  --secondary: oklch(0.65 0.28 300);
+  --background: oklch(0.08 0.04 295);
+  --foreground: oklch(0.98 0.005 300);
+  --card: oklch(0.14 0.06 295);
+  --card-foreground: oklch(0.98 0.005 300);
+  --popover: oklch(0.14 0.06 295);
+  --popover-foreground: oklch(0.98 0.005 300);
+  --primary: oklch(0.62 0.28 300);
+  --primary-foreground: oklch(0.08 0.04 295);
+  --secondary: oklch(0.68 0.28 350);
   --secondary-foreground: oklch(0.98 0.005 260);
-  --muted: oklch(0.18 0.02 260);
-  --muted-foreground: oklch(0.7 0.02 260);
-  --accent: oklch(0.85 0.19 195);
-  --accent-foreground: oklch(0.09 0.01 260);
+  --muted: oklch(0.2 0.05 295);
+  --muted-foreground: oklch(0.72 0.04 300);
+  --accent: oklch(0.68 0.28 350);
+  --accent-foreground: oklch(0.08 0.04 295);
   --destructive: oklch(0.65 0.25 25);
   --destructive-foreground: oklch(0.98 0.005 260);
-  --border: oklch(0.22 0.02 260);
-  --input: oklch(0.18 0.02 260);
-  --ring: oklch(0.85 0.19 195);
-  --neon-cyan: oklch(0.85 0.19 195);
-  --neon-violet: oklch(0.65 0.28 300);
-  --gradient-neon: linear-gradient(135deg, oklch(0.85 0.19 195), oklch(0.65 0.28 300));
-  --shadow-glow-cyan: 0 0 40px oklch(0.85 0.19 195 / 0.5), 0 0 80px oklch(0.85 0.19 195 / 0.25);
-  --shadow-glow-violet: 0 0 40px oklch(0.65 0.28 300 / 0.45);
+  --border: oklch(0.26 0.06 295);
+  --input: oklch(0.2 0.05 295);
+  --ring: oklch(0.62 0.28 300);
+  /* Kept legacy names to avoid churn: cyan = electric violet, violet = magenta */
+  --neon-cyan: oklch(0.62 0.28 300);
+  --neon-violet: oklch(0.68 0.28 350);
+  --gradient-neon: linear-gradient(135deg, oklch(0.62 0.28 300), oklch(0.68 0.28 350));
+  --shadow-glow-cyan: 0 0 40px oklch(0.62 0.28 300 / 0.55), 0 0 80px oklch(0.62 0.28 300 / 0.3);
+  --shadow-glow-violet: 0 0 40px oklch(0.68 0.28 350 / 0.5);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -160,34 +167,34 @@
 
 /* Light mode override — flips the neon palette onto a bright canvas */
 .light {
-  --background: oklch(0.94 0.008 250);
-  --foreground: oklch(0.22 0.02 260);
-  --card: oklch(0.965 0.006 250);
-  --card-foreground: oklch(0.22 0.02 260);
-  --popover: oklch(0.965 0.006 250);
-  --popover-foreground: oklch(0.22 0.02 260);
-  --primary: oklch(0.55 0.2 250);
+  --background: oklch(0.94 0.012 300);
+  --foreground: oklch(0.22 0.05 300);
+  --card: oklch(0.965 0.008 300);
+  --card-foreground: oklch(0.22 0.05 300);
+  --popover: oklch(0.965 0.008 300);
+  --popover-foreground: oklch(0.22 0.05 300);
+  --primary: oklch(0.5 0.25 300);
   --primary-foreground: oklch(0.99 0 0);
-  --secondary: oklch(0.55 0.25 300);
+  --secondary: oklch(0.55 0.26 350);
   --secondary-foreground: oklch(0.99 0 0);
-  --muted: oklch(0.9 0.01 255);
-  --muted-foreground: oklch(0.42 0.02 260);
-  --accent: oklch(0.55 0.2 250);
+  --muted: oklch(0.9 0.015 300);
+  --muted-foreground: oklch(0.42 0.04 300);
+  --accent: oklch(0.5 0.25 300);
   --accent-foreground: oklch(0.99 0 0);
   --destructive: oklch(0.6 0.24 25);
   --destructive-foreground: oklch(0.99 0 0);
-  --border: oklch(0.85 0.012 258);
-  --input: oklch(0.9 0.01 258);
-  --ring: oklch(0.55 0.2 250);
-  --neon-cyan: oklch(0.55 0.2 220);
-  --neon-violet: oklch(0.5 0.25 300);
-  --gradient-neon: linear-gradient(135deg, oklch(0.55 0.2 220), oklch(0.5 0.25 300));
+  --border: oklch(0.85 0.015 300);
+  --input: oklch(0.9 0.012 300);
+  --ring: oklch(0.5 0.25 300);
+  --neon-cyan: oklch(0.5 0.25 300);
+  --neon-violet: oklch(0.55 0.26 350);
+  --gradient-neon: linear-gradient(135deg, oklch(0.5 0.25 300), oklch(0.55 0.26 350));
 }
 
 .light .grid-bg {
   background-image:
-    linear-gradient(to right, oklch(0.55 0.2 220 / 0.08) 1px, transparent 1px),
-    linear-gradient(to bottom, oklch(0.55 0.2 220 / 0.08) 1px, transparent 1px);
+    linear-gradient(to right, oklch(0.5 0.25 300 / 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, oklch(0.5 0.25 300 / 0.08) 1px, transparent 1px);
 }
 
 @utility text-gradient-neon {
@@ -203,8 +210,8 @@
 
 @utility grid-bg {
   background-image:
-    linear-gradient(to right, oklch(0.85 0.19 195 / 0.06) 1px, transparent 1px),
-    linear-gradient(to bottom, oklch(0.85 0.19 195 / 0.06) 1px, transparent 1px);
+    linear-gradient(to right, oklch(0.62 0.28 300 / 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, oklch(0.62 0.28 300 / 0.07) 1px, transparent 1px);
   background-size: 48px 48px;
 }
 
