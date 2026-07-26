@@ -147,22 +147,24 @@ function Index() {
       </div>
 
       {/* Nav */}
-      <header className="mx-auto flex max-w-7xl items-center justify-between px-6 py-6">
-        <div className="flex items-center gap-2">
-          <div className="h-2.5 w-2.5 rounded-full bg-[var(--neon-cyan)] shadow-[0_0_12px_var(--neon-cyan)]" />
-          <span className="text-sm font-semibold tracking-tight">Vertex</span>
-          <span className="text-sm text-muted-foreground">/ studio</span>
-        </div>
-        <nav className="hidden gap-8 text-sm text-muted-foreground md:flex">
-          <a href="#metricas" className="transition-colors hover:text-foreground">Resultados</a>
-          <a href="#trabajos" className="transition-colors hover:text-foreground">Trabajos</a>
-          <a href="#calculadora" className="transition-colors hover:text-foreground">Calculadora</a>
-          <a href="#contacto" className="transition-colors hover:text-foreground">Contacto</a>
-        </nav>
-        <div className="flex items-center gap-3">
-          <MagneticButton variant="ghost" onClick={scrollTo("contacto")} className="px-5 py-2 text-sm">
-            Empezar
-          </MagneticButton>
+      <header className="sticky top-4 z-50 mx-auto max-w-7xl px-6">
+        <div className="flex items-center justify-between rounded-2xl border border-white/10 bg-background/40 px-5 py-3 shadow-[0_10px_40px_-15px_rgba(0,0,0,0.6)] backdrop-blur-xl backdrop-saturate-150 supports-[backdrop-filter]:bg-background/30">
+          <div className="flex items-center gap-2">
+            <div className="h-2.5 w-2.5 rounded-full bg-[var(--neon-cyan)] shadow-[0_0_12px_var(--neon-cyan)]" />
+            <span className="text-sm font-semibold tracking-tight">Vertex</span>
+            <span className="text-sm text-muted-foreground">/ studio</span>
+          </div>
+          <nav className="hidden gap-8 text-[11px] uppercase tracking-[0.2em] text-muted-foreground md:flex">
+            <a href="#metricas" className="transition-colors hover:text-foreground">Resultados</a>
+            <a href="#trabajos" className="transition-colors hover:text-foreground">Trabajos</a>
+            <a href="#calculadora" className="transition-colors hover:text-foreground">Calculadora</a>
+            <a href="#contacto" className="transition-colors hover:text-foreground">Contacto</a>
+          </nav>
+          <div className="flex items-center gap-3">
+            <MagneticButton variant="ghost" onClick={scrollTo("contacto")} className="px-5 py-2 text-xs uppercase tracking-[0.15em]">
+              Empezar
+            </MagneticButton>
+          </div>
         </div>
       </header>
 
@@ -185,17 +187,15 @@ function Index() {
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             className="relative z-10 lg:col-span-7 lg:pr-6"
           >
-            <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-border bg-card/50 px-4 py-1.5 text-xs uppercase tracking-[0.2em] text-muted-foreground backdrop-blur">
-              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[var(--neon-cyan)]" />
-              Agencia de conversión · Cupos limitados
+            <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-border bg-card/50 px-3 py-1 text-[10px] uppercase tracking-[0.25em] text-muted-foreground backdrop-blur">
+              <span className="h-1 w-1 animate-pulse rounded-full bg-[var(--neon-cyan)]" />
+              Agencia de conversión
             </div>
-            <h1 className="text-balance text-left text-5xl font-bold leading-[0.98] tracking-tight md:text-7xl lg:text-[6rem]">
-              Transformamos tu presencia digital en{" "}
-              <span className="text-gradient-neon">48 horas</span>
+            <h1 className="text-balance text-left font-bold uppercase leading-[0.82] tracking-[-0.04em] text-[clamp(3.5rem,13vw,11rem)]">
+              Vendé <span className="text-gradient-neon">más</span> en <span className="whitespace-nowrap">48h</span>
             </h1>
-            <p className="mt-8 max-w-xl text-left text-lg text-muted-foreground md:text-xl">
-              Estrategia de conversión, velocidad extrema y tecnología de vanguardia.
-              Convertimos webs obsoletas en máquinas de venta.
+            <p className="mt-10 max-w-md text-left text-xs uppercase leading-relaxed tracking-[0.2em] text-muted-foreground">
+              Estrategia · Velocidad · Diseño premium — Webs obsoletas convertidas en máquinas de venta.
             </p>
             <div className="mt-12 flex flex-wrap items-center gap-4">
               <MagneticButton onClick={scrollTo("cta-final")}>
