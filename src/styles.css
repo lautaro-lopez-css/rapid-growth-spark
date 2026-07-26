@@ -149,6 +149,17 @@
     border-color: var(--color-border);
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+  /* Offset anchor targets so the fixed glass nav doesn't cover them */
+  section[id] {
+    scroll-margin-top: 6rem;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
