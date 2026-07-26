@@ -147,7 +147,7 @@ function Index() {
       </div>
 
       {/* Nav */}
-      <header className="sticky top-4 z-50 mx-auto max-w-7xl px-6">
+      <header className="fixed inset-x-0 top-4 z-50 mx-auto max-w-7xl px-6">
         <div className="flex items-center justify-between rounded-2xl border border-white/10 bg-background/40 px-5 py-3 shadow-[0_10px_40px_-15px_rgba(0,0,0,0.6)] backdrop-blur-xl backdrop-saturate-150 supports-[backdrop-filter]:bg-background/30">
           <div className="flex items-center gap-2">
             <div className="h-2.5 w-2.5 rounded-full bg-[var(--neon-cyan)] shadow-[0_0_12px_var(--neon-cyan)]" />
