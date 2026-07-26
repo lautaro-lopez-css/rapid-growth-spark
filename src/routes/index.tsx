@@ -189,13 +189,14 @@ function Index() {
           >
             <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-border bg-card/50 px-3 py-1 text-[10px] uppercase tracking-[0.25em] text-muted-foreground backdrop-blur">
               <span className="h-1 w-1 animate-pulse rounded-full bg-[var(--neon-cyan)]" />
-              Agencia de conversión
+              Agencia de conversión · Cupos limitados
             </div>
-            <h1 className="text-balance text-left font-bold uppercase leading-[0.82] tracking-[-0.04em] text-[clamp(3.5rem,13vw,11rem)]">
-              Vendé <span className="text-gradient-neon">más</span> en <span className="whitespace-nowrap">48h</span>
+            <h1 className="text-balance text-left font-bold leading-[0.86] tracking-[-0.035em] text-[clamp(3rem,10vw,9rem)]">
+              Transformamos tu presencia digital en{" "}
+              <span className="text-gradient-neon">48 horas</span>
             </h1>
             <p className="mt-10 max-w-md text-left text-xs uppercase leading-relaxed tracking-[0.2em] text-muted-foreground">
-              Estrategia · Velocidad · Diseño premium — Webs obsoletas convertidas en máquinas de venta.
+              Estrategia de conversión · Velocidad extrema · Tecnología de vanguardia. Convertimos webs obsoletas en máquinas de venta.
             </p>
             <div className="mt-12 flex flex-wrap items-center gap-4">
               <MagneticButton onClick={scrollTo("cta-final")}>
