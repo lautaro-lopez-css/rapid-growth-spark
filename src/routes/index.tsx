@@ -64,8 +64,9 @@ function MetricCard({
   const ref = useRef<HTMLDivElement>(null);
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
-  const rx = useSpring(useTransform(my, [-1, 1], [8, -8]), { stiffness: 150, damping: 15 });
-  const ry = useSpring(useTransform(mx, [-1, 1], [-8, 8]), { stiffness: 150, damping: 15 });
+  const rx = useSpring(useTransform(my, [-1, 1], [12, -12]), { stiffness: 120, damping: 14, mass: 0.8 });
+  const ry = useSpring(useTransform(mx, [-1, 1], [-12, 12]), { stiffness: 120, damping: 14, mass: 0.8 });
+  const lift = useSpring(useTransform(mx, (v) => Math.abs(v) * 4), { stiffness: 120, damping: 14, mass: 0.8 });
   const sx = useMotionValue(50);
   const sy = useMotionValue(50);
 
@@ -93,8 +94,8 @@ function MetricCard({
       initial={{ opacity: 0, y: 30, filter: "blur(10px)" }}
       whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
       viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.8, delay: index * 0.12, ease: [0.16, 1, 0.3, 1] }}
-      style={{ rotateX: rx, rotateY: ry, transformStyle: "preserve-3d" }}
+      transition={{ type: "spring", stiffness: 60, damping: 14, mass: 1, delay: index * 0.12 }}
+      style={{ rotateX: rx, rotateY: ry, z: lift, transformStyle: "preserve-3d" }}
       className="group relative overflow-hidden bg-background p-10 md:p-12"
     >
       <motion.div
