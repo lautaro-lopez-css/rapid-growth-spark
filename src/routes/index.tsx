@@ -170,8 +170,8 @@ function Index() {
 
       {/* HERO — asymmetric */}
       <section className="relative mx-auto max-w-7xl px-6 pt-20 pb-48 md:pt-32 md:pb-64">
-        {/* 3D particle sphere background — interactive, sits behind text */}
-        <div className="pointer-events-none absolute inset-0 -z-0 overflow-hidden">
+        {/* 3D particle sphere background — full-bleed, interactive, sits behind text */}
+        <div className="pointer-events-none absolute top-0 bottom-0 left-1/2 z-0 w-screen -translate-x-1/2 overflow-hidden">
           <div className="pointer-events-auto absolute inset-0">
             <ParticleSphere />
           </div>
