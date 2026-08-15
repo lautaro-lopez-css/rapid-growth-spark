@@ -31,6 +31,28 @@ export const Route = createFileRoute("/")({
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:url", content: "https://rapid-growth-spark.lovable.app/" },
+    ],
+    links: [{ rel: "canonical", href: "https://rapid-growth-spark.lovable.app/" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "ProfessionalService",
+          name: "Vertex Studio",
+          url: "https://rapid-growth-spark.lovable.app/",
+          description:
+            "Agencia de conversión que transforma webs obsoletas en landings de alta conversión, con entrega garantizada en 48 horas.",
+          email: "hola@vertex.studio",
+          areaServed: "Worldwide",
+          serviceType: [
+            "Rediseño de landing pages",
+            "Optimización de conversión (CRO)",
+            "Optimización de Core Web Vitals",
+          ],
+        }),
+      },
     ],
   }),
   component: Index,
@@ -293,6 +315,15 @@ function Index() {
 
       {/* METRICS */}
       <section id="metricas" className="mx-auto max-w-7xl px-6 pb-48 md:pb-56">
+        <motion.div {...revealClip} className="mb-14 max-w-2xl">
+          <p className="mb-3 text-xs uppercase tracking-[0.25em] text-[var(--neon-cyan)]">
+            Resultados
+          </p>
+          <h2 className="text-4xl font-bold leading-tight tracking-tight md:text-5xl">
+            Números que respaldan{" "}
+            <span className="text-gradient-neon">cada rediseño</span>
+          </h2>
+        </motion.div>
         <div className="grid gap-px overflow-hidden rounded-3xl border border-border bg-border md:grid-cols-3 [perspective:1200px]">
           {[
             { value: 200, suffix: "%", label: "Aumento en conversión promedio" },
