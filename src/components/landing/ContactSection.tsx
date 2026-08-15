@@ -4,7 +4,7 @@ import { Mail, MessageSquare, Send, Check } from "lucide-react";
 
 // Configura aquí tu correo destino y tu WhatsApp (formato internacional sin +).
 const CONTACT_EMAIL = "hola@vertex.studio";
-const WHATSAPP_NUMBER = "5491100000000";
+const WHATSAPP_NUMBER = "5493515129104";
 
 export function ContactSection() {
   const [form, setForm] = useState({ name: "", email: "", company: "", message: "" });
