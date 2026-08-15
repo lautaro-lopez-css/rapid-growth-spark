@@ -166,6 +166,7 @@ export function AiChat() {
               />
               <motion.button
                 type="submit"
+                aria-label="Enviar mensaje"
                 disabled={loading || !input.trim()}
                 whileTap={{ scale: 0.9 }}
                 className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-[var(--neon-cyan)] to-[var(--neon-violet)] text-background disabled:opacity-40"
