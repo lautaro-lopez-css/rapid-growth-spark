@@ -99,7 +99,7 @@ export function Calculator() {
             </label>
             <SpringNumber value={visitors} className="text-2xl font-semibold text-foreground" />
           </div>
-          <Slider value={[visitors]} onValueChange={(v) => setVisitors(v[0])} min={500} max={50000} step={500} />
+          <Slider aria-label="Visitas mensuales" value={[visitors]} onValueChange={(v) => setVisitors(v[0])} min={500} max={50000} step={500} />
         </div>
 
         <div>
@@ -114,7 +114,7 @@ export function Calculator() {
             </div>
             <SpringNumber value={ticket} prefix="$" className="text-2xl font-semibold text-foreground" />
           </div>
-          <Slider value={[ticket]} onValueChange={(v) => setTicket(v[0])} min={20} max={3000} step={10} />
+          <Slider aria-label="Ticket promedio" value={[ticket]} onValueChange={(v) => setTicket(v[0])} min={20} max={3000} step={10} />
         </div>
 
         <div className="space-y-2 rounded-xl border border-border bg-background/40 p-4 text-xs text-muted-foreground">

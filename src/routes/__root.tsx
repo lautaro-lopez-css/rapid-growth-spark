@@ -77,14 +77,22 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Vertex Studio — Landings de alta conversión en 48 horas" },
+      {
+        name: "description",
+        content:
+          "Vertex Studio rediseña webs obsoletas en máquinas de venta: estrategia CRO, velocidad extrema y entrega garantizada en 48 horas.",
+      },
+      { name: "author", content: "Vertex Studio" },
+      { property: "og:site_name", content: "Vertex Studio" },
+      { property: "og:title", content: "Vertex Studio — Landings de alta conversión" },
+      {
+        property: "og:description",
+        content:
+          "Rediseño web premium orientado a conversión, entregado en 48 horas por Vertex Studio.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       {
