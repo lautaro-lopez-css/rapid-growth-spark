@@ -77,6 +77,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
+      {
+        name: "google-site-verification",
+        content: "cTAL6TOTZnd28WexuG60gyhKRUQrNZmyozbwT6mFLpY",
+      },
       { title: "Vertex Studio — Landings de alta conversión en 48 horas" },
       {
         name: "description",
