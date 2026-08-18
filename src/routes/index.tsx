@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from "motion/react";
-import { useRef, type MouseEvent } from "react";
+import { useRef, type MouseEvent, lazy, Suspense } from "react";
 import { MagneticButton } from "@/components/landing/MagneticButton";
 import { AnimatedCounter } from "@/components/landing/AnimatedCounter";
 import { BeforeAfter } from "@/components/landing/BeforeAfter";
@@ -9,31 +9,37 @@ import { Flashlight } from "@/components/landing/Flashlight";
 import { MatrixRain } from "@/components/landing/MatrixRain";
 import { AiChat } from "@/components/landing/AiChat";
 import { ContactSection } from "@/components/landing/ContactSection";
-import { ParticleSphere } from "@/components/landing/ParticleSphere";
+import { ServiceCards } from "@/components/landing/ServiceCards";
+import { ProcessTimeline } from "@/components/landing/ProcessTimeline";
+import { FAQ } from "@/components/landing/FAQ";
+import { CaseStudies } from "@/components/landing/CaseStudies";
 import before1 from "@/assets/before-1.jpg";
 import after1 from "@/assets/after-1.jpg";
 import before2 from "@/assets/before-2.jpg";
 import after2 from "@/assets/after-2.jpg";
 
+// Lazy load ParticleSphere for performance
+const ParticleSphere = lazy(() => import("@/components/landing/ParticleSphere").then(m => ({ default: m.ParticleSphere })));
+
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Landings que convierten en 48 horas | Vertex Studio" },
+      { title: "Automatizá tu captación, reservas y operaciones con IA en 48 horas | Vertex Studio" },
       {
         name: "description",
         content:
-          "Transformamos webs obsoletas en máquinas de venta. Estrategia CRO, velocidad extrema y diseño premium entregado en 48 horas.",
+          "Agencia B2B de automatización e IA. Landing High-Converting, Chatbot WhatsApp, Voicebot para Reservas y Agente IA Operativo. Entrega en 48 horas.",
       },
-      { property: "og:title", content: "Landings que convierten en 48 horas" },
+      { property: "og:title", content: "Automatizá tu captación, reservas y operaciones con IA en 48 horas" },
       {
         property: "og:description",
-        content: "Rediseño web premium orientado a conversión, entregado en 48 horas.",
+        content: "Agencia B2B de automatización e IA con 4 servicios: Landing, Chatbot WhatsApp, Voicebot y Agente IA. Entrega garantizada en 48hs.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { property: "og:url", content: "https://rapid-growth-spark.lovable.app/" },
+      { property: "og:url", content: "https://vertex.studio/" },
     ],
-    links: [{ rel: "canonical", href: "https://rapid-growth-spark.lovable.app/" }],
+    links: [{ rel: "canonical", href: "https://vertex.studio/" }],
     scripts: [
       {
         type: "application/ld+json",
@@ -41,16 +47,74 @@ export const Route = createFileRoute("/")({
           "@context": "https://schema.org",
           "@type": "ProfessionalService",
           name: "Vertex Studio",
-          url: "https://rapid-growth-spark.lovable.app/",
+          url: "https://vertex.studio/",
           description:
-            "Agencia de conversión que transforma webs obsoletas en landings de alta conversión, con entrega garantizada en 48 horas.",
+            "Agencia B2B de automatización e IA con 4 servicios: Landing High-Converting, Chatbot WhatsApp IA, Voicebot para Reservas y Agente IA Operativo.",
           email: "hola@vertex.studio",
           areaServed: "Worldwide",
           serviceType: [
-            "Rediseño de landing pages",
-            "Optimización de conversión (CRO)",
-            "Optimización de Core Web Vitals",
+            "Landing High-Converting (SEO + GEO + CRO)",
+            "Chatbot de WhatsApp IA",
+            "Voicebot para Reservas",
+            "Agente IA Operativo",
           ],
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: [
+            {
+              "@type": "Question",
+              name: "¿Cuáles son los tiempos de entrega?",
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: "El prototipo de landing se entrega en 48 horas. Los demás servicios (chatbot, voicebot, agente IA) tienen tiempos de implementación según complejidad, coordinados en la reunión de diagnóstico."
+              }
+            },
+            {
+              "@type": "Question",
+              name: "¿Los servicios son personalizables?",
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: "Sí, cada servicio se adapta a las necesidades específicas de tu negocio. Realizamos un diagnóstico gratuito para entender tus requerimientos."
+              }
+            },
+            {
+              "@type": "Question",
+              name: "¿Cómo manejan los datos y la privacidad?",
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: "Todos los datos están protegidos bajo estándares de seguridad. No compartimos información con terceros y cumplimos con las normativas de privacidad vigentes."
+              }
+            },
+            {
+              "@type": "Question",
+              name: "¿Puedo contratar servicios sueltos o el sistema completo?",
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: "Podés contratar cada servicio de forma independiente o el sistema completo de automatización. Te asesoramos sobre la mejor opción para tu caso."
+              }
+            },
+            {
+              "@type": "Question",
+              name: "¿Cómo miden los resultados?",
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: "Implementamos tracking y analytics para medir conversiones, leads calificados, reservas y tiempo ahorrado. Reportamos métricas claras de ROI."
+              }
+            },
+            {
+              "@type": "Question",
+              name: "¿Puedo hacer cambios después de la entrega?",
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: "Sí, ofrecemos soporte post-implementación y realizamos ajustes según sea necesario. Consultanos sobre planes de mantenimiento."
+              }
+            }
+          ]
         }),
       },
     ],

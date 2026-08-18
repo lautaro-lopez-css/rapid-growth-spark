@@ -7,9 +7,10 @@ import { askAssistant } from "@/lib/ai-chat.functions";
 type Msg = { role: "user" | "assistant"; content: string };
 
 const SUGGESTIONS = [
-  "¿En cuánto tiempo entregan?",
-  "¿Qué incluye el rediseño?",
-  "¿Cómo miden la conversión?",
+  "¿Qué incluye el chatbot de WhatsApp?",
+  "¿Cómo funciona el voicebot de reservas?",
+  "¿Qué hace el agente IA operativo?",
+  "¿Entregan en 48hs?",
 ];
 
 export function AiChat() {
@@ -19,7 +20,7 @@ export function AiChat() {
     {
       role: "assistant",
       content:
-        "Hola 👋 Soy el asistente de Vertex. Puedo contarte sobre nuestro proceso, tiempos y cómo aumentamos la conversión. ¿Qué te gustaría saber?",
+        "Hola 👋 Soy el asistente de Vertex Studio. Puedo contarte sobre nuestros servicios de automatización e IA: Landing High-Converting, Chatbot de WhatsApp, Voicebot para Reservas y Agente IA Operativo. ¿Qué te gustaría saber?",
     },
   ]);
   const [loading, setLoading] = useState(false);
@@ -41,14 +42,12 @@ export function AiChat() {
       const res = await ask({ data: { messages: next.slice(-10) } });
       setMessages([...next, { role: "assistant", content: res.reply }]);
     } catch (e) {
+      const errorMsg = e instanceof Error ? e.message : "No pude responder ahora. Probá escribirnos por WhatsApp.";
       setMessages([
         ...next,
         {
           role: "assistant",
-          content:
-            e instanceof Error
-              ? `⚠️ ${e.message}`
-              : "No pude responder ahora. Probá escribirnos por WhatsApp.",
+          content: `⚠️ ${errorMsg}`,
         },
       ]);
     } finally {
@@ -161,8 +160,8 @@ export function AiChat() {
               <input
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder="Preguntá sobre nuestros servicios…"
-                className="flex-1 rounded-xl border border-border bg-background/60 px-3 py-2 text-sm outline-none placeholder:text-muted-foreground focus:border-[var(--neon-cyan)]/60"
+                placeholder="Preguntá sobre automatización e IA…"
+                className="flex-1 rounded-xl border border-border bg-background/60 px-3 py-2 text-sm outline-none placeholder:text-muted-foreground/60 focus:border-[var(--neon-cyan)]/60"
               />
               <motion.button
                 type="submit"
